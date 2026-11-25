@@ -1,0 +1,91 @@
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage[varvw]{newtxmath}
+
+\begin{document}
+
+\title{Explaining Faults by Counterfactual Reasoning}
+\author{Philipp Dirscherl}
+\authorrunning{P. Dirscherl}
+\institute{OTH Regensburg\\\email{your.email@example.com}}
+
+\maketitle
+
+\begin{abstract}
+% Write this last. Summarize the question, the structural causal model,
+% the published DC motor case, and the paper's theoretical conclusion.
+\keywords{Counterfactual reasoning \and Fault responsibility \and
+Model-based diagnosis}
+\end{abstract}
+
+\section{Introduction}
+% Motivate symptom-level explanation when several faults are present.
+% State the research question and delimit the paper as a theoretical analysis
+% of published work. Use Reiter for the diagnosis background.
+
+\section{Structural Models and Actual Causation}
+% Explain the role of a causal model, context, and intervention.
+% Present only the parts of Halpern and Pearl's actual-cause definition
+% needed to understand the case: actuality, counterfactual dependence
+% under a suitable contingency, and minimality.
+
+\section{Counterfactual Fault Removal in a Dynamic System}
+% Explain the time-indexed motor model at a conceptual level.
+% State what is fixed between factual and counterfactual trajectories
+% and what the closed-loop controller recomputes.
+% Define symptom severity and the overheating event separately.
+
+\section{Analysis of the Published DC Motor Case}
+% Focus on Muji\'{c} and Wotawa's FEF4 + FMF1 experiment.
+% Reproduce only the values from their Table 2 needed for the argument,
+% with a citation in the caption or surrounding text.
+% Explain why both faults affect severity but only FMF1 is necessary
+% for their 90-degree-C overheating event in this simulated case.
+
+\section{Discussion and Limitations}
+% Develop the hypothetical 100-degree-C threshold as your own
+% analytical deduction from the published values, not a new experiment.
+% Explain dependence on event definition, model accuracy, and operating
+% conditions. Discuss the authors' parameter-mismatch repetitions
+% and their use of true simulated initial states.
+% If using the formal term degree of responsibility, distinguish
+% Chockler and Halpern's definition from the motor paper's score.
+
+\section{Conclusion}
+% Answer the research question for this case and state the scope
+% of the conclusion in two or three sentences.
+
+\begin{thebibliography}{4}
+
+\bibitem{reiter1987}
+Reiter, R.: A theory of diagnosis from first principles.
+Artificial Intelligence \textbf{32}(1), 57--95 (1987).
+\doi{10.1016/0004-3702(87)90062-2}
+
+\bibitem{chockler2004}
+Chockler, H., Halpern, J.Y.: Responsibility and blame:
+a structural-model approach.
+Journal of Artificial Intelligence Research \textbf{22}, 93--115 (2004).
+\doi{10.1613/JAIR.1391}
+
+\bibitem{halpern2005}
+Halpern, J.Y., Pearl, J.: Causes and explanations:
+a structural-model approach. Part I: Causes.
+The British Journal for the Philosophy of Science
+\textbf{56}(4), 843--887 (2005).
+\doi{10.1093/bjps/axi147}
+
+\bibitem{mujic2026}
+Muji\'{c}, E., Wotawa, F.: Counterfactual fault responsibility
+in a dynamic structural causal model of a DC motor.
+In: 37th International Conference on Principles of Diagnosis
+and Resilient Systems (DX 2026).
+OASIcs, vol. 148, pp. 16:1--16:14.
+Schloss Dagstuhl (2026).
+\doi{10.4230/OASIcs.DX.2026.16}
+
+\end{thebibliography}
+
+\end{document}

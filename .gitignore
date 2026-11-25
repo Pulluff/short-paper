@@ -1,0 +1,21 @@
+# LaTeX build files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+
+# Outputs generated from this paper
+Latex/paper.pdf
+Latex/DescriptionTexts.txt
+Latex/*-eps-converted-to.pdf
+Latex/build/
+Latex/out/
