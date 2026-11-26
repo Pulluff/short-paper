@@ -14,28 +14,107 @@
 \maketitle
 
 \begin{abstract}
-% Write this last. Summarize the question, the structural causal model,
-% the published DC motor case, and the paper's theoretical conclusion.
-\keywords{Counterfactual reasoning \and Fault responsibility \and
-Model-based diagnosis}
+This paper examines how two simultaneously occurring motor faults that cause overheating can be explained 
+through counterfactual reasoning. It analyses how contributions to temperature and necessity for overheating 
+can be revealed by fault removal using structural causal models. 
+A thought experiment with a different temperature threshold explores how the explanation is affected by the definition of the event. 
+The discussion considers how these conclusions depend on the operating conditions and the model.
 \end{abstract}
 
 \section{Introduction}
 % Motivate symptom-level explanation when several faults are present.
 % State the research question and delimit the paper as a theoretical analysis
 % of published work. Use Reiter for the diagnosis background.
+When several active faults cause a motor to overheat, 
+identifying these does not answer the question about their individual roles.
+Model-based diagnosis seeks to identify faulty components that account
+for a discrepancy between a system's observed and expected
+behaviour~\cite[p.~57]{reiter1987}.
+To explain a particular overheating event, we can then ask what would
+have happened if one of those faults had been absent.
+Would the winding have remained below its temperature limit, or would
+it still have overheated at a lower peak temperature?
+Counterfactual comparisons make it possible to examine these different
+contributions~\cite[Sect.~3.3]{mujic2026}.
+
+...
+
 
 \section{Structural Models and Actual Causation}
-% Explain the role of a causal model, context, and intervention.
-% Present only the parts of Halpern and Pearl's actual-cause definition
-% needed to understand the case: actuality, counterfactual dependence
-% under a suitable contingency, and minimality.
+A fault can raise the temperature of a motor winding even if the winding
+would have overheated without it. To ask whether the fault caused a
+particular overheating event, we must first specify the event, for example
+that the winding reached a given temperature at least once during the run.
+In a structural causal model (SCM), equations describe how variables such as
+current and temperature depend on other quantities. A \emph{context} fixes
+the background conditions represented by variables whose values are
+determined outside the model. An \emph{intervention} sets a selected
+variable to a specified value and lets the remaining equations determine
+the consequences in that same context~\cite[Sect.~2]{halpern2005}.
+
+The simplest test asks whether the event would still have happened if the
+fault had been removed. THe fault is necessary in the context, 
+when it being absent prevents the event. Halpern and Pearl also consider
+cases in which dependence becomes visible only under a \emph{contingency}.
+Their definition first requires that the proposed cause and the outcome
+both occurred. There must then be a setting of other variables under which
+changing the candidate cause changes the outcome. With the candidate
+restored to its actual value, the outcome must persist even when only
+parts of the contingency are imposed and selected variables along the
+causal process are held at their actual values. Finally, a proposed cause
+is minimal only if no proper subset of it meets these
+conditions~\cite[Def.~3.1]{halpern2005}.
+
+Halpern and Pearl illustrate the role of a contingency with two lit
+matches. Suppose both are dropped in a dry forest and either match alone
+would be sufficent to burn the forest down. Removing the first match still leaves
+the second to start the fire. If the second match is held unlit, however,
+the first match can still cause the forest to burn down. By symmetry, each match is
+an actual cause in this model, although neither of them is individually necessary
+when both are lit~\cite[Example~3.2]{halpern2005}. This distinction matters
+for the motor case. If overheating still occurs after a fault is removed, that
+settles the question of its individual necessity under the simulated
+conditions. Nevertheless, the fault could still have an effect on peak temperature, which is a seperate question.
+
+The two-match example also illustrates how causal responsibility can be graded. 
+Chockler and Halpern define the degree of responsibility of an actual cause as 
+\(1/(k+1)\), where \(k\) is the smallest number of other variables that must change 
+from their actual values to make the outcome depend on that cause~\cite[Def.~3.2]{chockler2004}. 
+In the simple forest model, either match is enough to start the fire.
+If the second match is unlit, it depends on the first one wether the forest burns.
+Therefore, the minimum number of changes needed to make the first match decisive is one.
+This leads to  a match having a degree of responsibility of \(1/2\).
+The motor study asks a different quantitative question. 
+Mujić and Wotawa keep the other fault at its factual setting and measure how 
+much removing the selected fault changes a symptom. For peak winding temperature, 
+that change is expressed in degrees Celsius~\cite[Sect.~3.3, Eq.~(13)]{mujic2026}.
 
 \section{Counterfactual Fault Removal in a Dynamic System}
-% Explain the time-indexed motor model at a conceptual level.
-% State what is fixed between factual and counterfactual trajectories
-% and what the closed-loop controller recomputes.
-% Define symptom severity and the overheating event separately.
+Muji\'{c} and Wotawa apply fault removal to a dynamic model of a DC motor.
+At each time step, the motor's current state, applied voltage, load torque,
+and active faults determine its next state. In the overheating experiment,
+the \emph{factual} run includes both partial demagnetization and increased
+viscous friction. To test one fault, the authors simulate the task again
+with that fault absent from the start and the other fault still active.
+Each run starts from the same motor state and follows the same reference
+motion and load profile. The controller uses the position error in each
+run to compute its voltage command. The motor can therefore draw a
+different current while carrying out the same task~\cite[Sects.~3.3
+and~4.2]{mujic2026}.
+
+The resulting temperature trajectories answer two questions. How much did
+the fault raise the peak winding temperature? Let \(P\) be the peak with
+both faults present and \(Q\) the peak with only one of them present. The
+drop \(P-Q\) measures a fault's contribution to that apex under the circumstances 
+that the other fault is still present. The authors count a drop greater than
+\(5\,^{\circ}\mathrm{C}\) as a contribution to thermal severity. Was the
+fault also necessary for overheating? The authors define the event as the
+winding reaching or exceeding a temperature of \(90\,^{\circ}\mathrm{C}\) during the run.
+Removal prevents that event precisely when \(Q < 90\,^{\circ}\mathrm{C} \leq P\).
+Thus, a fault can still count as severe even when the winding peaks without it
+~\cite[Sect.~4.2, Eqs.~(18)--(19)]{mujic2026}.
+
+...
 
 \section{Analysis of the Published DC Motor Case}
 % Focus on Muji\'{c} and Wotawa's FEF4 + FMF1 experiment.
