@@ -37,6 +37,18 @@ it still have overheated at a lower peak temperature?
 Counterfactual comparisons make it possible to examine these different
 contributions~\cite[Sect.~3.3]{mujic2026}.
 
+This paper asks how counterfactual reasoning can distinguish a fault
+that was necessary for overheating from one that increased its severity
+when both faults were active. It addresses this question through a
+literature-based analysis of Muji\'{c} and Wotawa's published DC motor
+simulation, which combines partial demagnetization and increased
+viscous friction~\cite[Sect.~4.2]{mujic2026}.
+The analysis interprets the reported temperature changes using the
+concepts of intervention and actual causation introduced by Halpern
+and Pearl~\cite[Sects.~2--3]{halpern2005}.
+It then considers a hypothetical change in the overheating threshold
+to examine how the definition of the event affects the explanation.
+
 ...
 
 
@@ -45,12 +57,23 @@ A fault can raise the temperature of a motor winding even if the winding
 would have overheated without it. To ask whether the fault caused a
 particular overheating event, we must first specify the event, for example
 that the winding reached a given temperature at least once during the run.
-In a structural causal model (SCM), equations describe how variables such as
-current and temperature depend on other quantities. A \emph{context} fixes
-the background conditions represented by variables whose values are
-determined outside the model. An \emph{intervention} sets a selected
-variable to a specified value and lets the remaining equations determine
-the consequences in that same context~\cite[Sect.~2]{halpern2005}.
+A structural causal model (SCM) is a pair
+\[
+M=(S,\mathcal{F}), \qquad S=(U,V,\mathcal{R}),
+\]
+where \(U\) is the set of exogenous variables, \(V\) is the set of
+endogenous variables, and \(\mathcal{R}\) assigns each variable its set of
+possible values. Exogenous variables represent conditions determined
+outside the model. For each endogenous variable \(X\in V\), a function
+\(F_X\in\mathcal{F}\) determines its value from the values of the other
+variables. A \emph{context} \(\mathbf{u}\) assigns values to the exogenous
+variables. An \emph{intervention} \(X\leftarrow x\) replaces the structural
+equation for \(X\) with the fixed assignment \(X=x\). The remaining
+equations determine the consequences in the same context. In a recursive
+model, these equations have a unique solution for each
+context~\cite[Sect.~2]{halpern2005,chockler2004}. The motor model uses
+continuous quantities, so their ranges include real-valued temperatures
+and currents~\cite[Sect.~3.2]{mujic2026}.
 
 The simplest test asks whether the event would still have happened if the
 fault had been removed. THe fault is necessary in the context, 
